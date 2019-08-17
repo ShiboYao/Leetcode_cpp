@@ -25,7 +25,7 @@ public:
         }
         if (minus && r > INT_MAX)
             return 0;
-        if (!minus && r > INT_MAX)
+        if (!minus && r >= INT_MAX)
             return 0;
 
         return minus?-(signed int)r:r;
