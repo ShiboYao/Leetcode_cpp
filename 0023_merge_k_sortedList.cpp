@@ -17,32 +17,25 @@ public:
             return head2;
         if (!head2)
             return head1;
-        ListNode *p1, *p2;
-        bool num = false;
-        if (head1->val <= head2->val){
-            p1 = head1;
-            p2 = head2;
-        }
-        else {
-           p1 = head2;
-           p2 = head1;
-           num = true;
-        }
-        ListNode *q1, *q2;
-        while (p1->next && p2){
-            while (p1->next && p1->next->val <= p2->val)
-                p1 = p1->next;
-            q1 = p1->next;
-            p1->next = p2;
-            while (p2 && p2->val < p1->next->val){
-                q2 = p2;
-                p2 = p2->next;
+        ListNode dummy(-1);
+        ListNode* p = &dummy;
+        while (head1 && head2){
+            if (head1->val <= head2->val){
+                p->next = head1;
+                head1 = head1->next;
             }
-            p1 = q2;
-            p1->next = q1;
+            else {
+                p->next = head2;
+                head2 = head2->next;
+            }
+            p = p->next;
         }
+        if (!head1)
+            p->next = head2;
+        else 
+            p->next = head1;
 
-        return num?head2:head1;
+        return dummy.next;
     }
     
     ListNode* merge(vector<ListNode*>& lists, int left, int right){
@@ -68,19 +61,21 @@ public:
 
 int main(){
     vector<ListNode*> lists(3);
-    *lists[0] = ListNode(1);
-    *lists[0]->next = ListNode(4);
-    *lists[0]->next->next = ListNode(5);
-    *lists[1] = ListNode(1);
-    *lists[1]->next = ListNode(3);
-    *lists[1]->next->next = ListNode(4);
-    *lists[2] = ListNode(2);
-    *lists[2]->next = ListNode(6);
-
+    lists[0] = new ListNode(1);
+    lists[0]->next = new ListNode(4);
+    lists[0]->next->next = new ListNode(5);
+    lists[1] = new ListNode(1);
+    lists[1]->next = new ListNode(3);
+    lists[1]->next->next = new ListNode(4);
+    lists[2] = new ListNode(2);
+    lists[2]->next = new ListNode(6);
+    
     Solution s;
     ListNode* p = s.mergeKLists(lists);
-    while (p)
+    while (p){
         cout << p->val << ' ';
+        p = p->next;
+    }
     cout << endl;
 
     return 0;
