@@ -25,22 +25,27 @@ public:
         if (!node) {
             return NULL;
         }
-        if (copies.find(node) == copies.end()) {
-            copies[node] = new Node(node -> val, {});
-            for (Node* neighbor : node -> neighbors) {
-                copies[node] -> neighbors.push_back(cloneGraph(neighbor));
-            }
-        }
-        return copies[node];
+        unordered_map<Node*, Node*> copied;
+        clone(node, copied);
+
+        return copied[node];
     }
 private:
-    unordered_map<Node*, Node*> copies;
+    Node* clone(Node* node, unordered_map<Node*, Node*>&copied){
+        if (copied.find(node) != copied.end())
+            return copied[node];
+        copied[node] = new Node(node->val);
+        for (auto nbr : node->neighbors)
+            copied[node]->neighbors.push_back(clone(nbr, copied));
+
+        return copied[node];
+    }
 };
 
 
 
 int main(){
-    cout << "test\n" << endl;
+    cout << "test" << endl;
 
     return 0;
 }
