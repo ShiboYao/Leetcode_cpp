@@ -7,30 +7,25 @@ public:
     int strStr(string haystack, string needle) {
         if (needle.empty())
             return 0;
-        int i = 0, j = 0;
+        int i = 0, j = 0, index = 0;
         int size = haystack.size(), size2 = needle.size();
-        while (i < size){
-            while (i < size && haystack[i] != needle[j])
+        while (i < size && j < size2){
+            if (haystack[i] == needle[j]){
                 i++;
-            int k = i;
-            while (k < size && j < size2 && haystack[k] == needle[j]){
-                k++;
                 j++;
             }
-            if (j == size2)
-                return i;
             else {
+                index++;
+                i = index;
                 j = 0;
-                i++;
-                while (i < k && haystack[i] != needle[j])
-                    i++;
             }
         }
+        if (j == size2)
+            return index;
 
         return -1;
     }
 };
-
 
 
 int main(int argc, char** argv){
