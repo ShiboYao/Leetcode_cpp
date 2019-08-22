@@ -1,8 +1,9 @@
 #include <iostream>
 #include <vector>
+#include <unordered_map>
 using namespace std;
 
-
+/*
 class Solution {
 public:
     int subarraySum(vector<int>& nums, int k) {
@@ -20,7 +21,23 @@ public:
         return count;
     }
 };
+*/
 
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k){
+        int r = 0;
+        unordered_map<int, int> mp = {{0, 1}};
+        int sum = 0;
+        for (int i = 0; i < nums.size(); i++){
+            sum += nums[i];
+            r += mp[sum - k];
+            mp[sum]++;
+        }
+
+        return r;
+    }
+};
 
 
 int main(){
