@@ -1,9 +1,10 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
+#include <unordered_set>
 using namespace std;
 
-
+/*
 class Solution {
 public:
     vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
@@ -24,7 +25,24 @@ public:
         return a;
     }
 };
+*/
+class Solution {
+public:
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2){
+        vector<int> a;
+        unordered_set<int> set;
+        for (int& i: nums1)
+            set.insert(i);
+        for (int& j : nums2){
+            if (set.count(j) > 0){
+                set.erase(j);
+                a.push_back(j);
+            }
+        }
 
+        return a;
+    }
+};
 
 
 int main(){
