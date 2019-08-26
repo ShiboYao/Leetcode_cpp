@@ -1,8 +1,9 @@
 #include <iostream>
 #include <vector>
+#include <queue>
 using namespace std;
 
-
+/*
 class Solution {
 private:
     int partition(vector<int>& nums, int low, int high){
@@ -32,7 +33,22 @@ public:
         }
     }
 };
+*/
 
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k){
+        priority_queue<int> pq;
+        for (int n : nums)
+            pq.push(n);
+        while (k > 1) {
+            pq.pop();
+            k--;
+        }
+
+        return pq.top();
+    }
+};
 
 
 int main(){
