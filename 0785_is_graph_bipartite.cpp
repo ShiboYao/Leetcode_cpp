@@ -37,7 +37,7 @@ public:
 /*
 class Solution {
 public:
-    bool util(vector<int>& visited, vector<vector<int>> graph, int node, int t){
+    bool util(vector<int>& visited, vector<vector<int>>& graph, int node, int t){
         if (visited[node] == 0) {
             if (t == 0)
                 t = 1;
