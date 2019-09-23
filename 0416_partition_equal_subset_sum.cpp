@@ -12,7 +12,7 @@ public:
         for (int& n : nums){
             for (int i = S; i >= n; i--)
                 a[i] += a[i-n];
-            if (a[S] > 1)
+            if (a[S])
                 return true;
         }
 
